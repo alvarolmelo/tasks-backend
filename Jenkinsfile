@@ -16,7 +16,7 @@ pipeline{
                 scannerHome = tool 'SONAR_SCANNER'
             }
             steps{
-                withSonarQubeEnv('SONAR_LOCAL_QG'){
+                withSonarQubeEnv('SONAR_LOCAL'){
                     bat "${scannerHome}/bin/sonar-scanner -e -Dsonar.projectKey=DeployBack -Dsonar.host.url=http://localhost:9000/ -Dsonar.login=sqa_1e5b8f9a2f3c9a955d8eb1ef5693cfe5b4c95e97 -Dsonar.java.binaries=target -Dsonar.coverage.exclusions=**/.mvn/**,**/src/text/**,**/model/**,**Aplication.java"
                 }
             }
@@ -34,6 +34,7 @@ pipeline{
                 deploy adapters: [tomcat9(credentialsId: 'TomcatLogin', path: '', url: 'http://localhost:8001/manager')], contextPath: 'tasks-backend', war: 'target/tasks-backend.war'
             }
         }
+
 
     }
 }
