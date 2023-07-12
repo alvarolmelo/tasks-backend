@@ -1,11 +1,17 @@
 pipeline{
     agent any
     stages {
-        stage('Just Test'){
+        stage('Build Backend'){
             steps{
-                bat 'echo deu certo'
+                bat 'mvnw clean package -DskipTests=true'
             }
         }
+        stage('Test Backend'){
+            steps{
+                bat 'mvnw clean test'
+            }
+        }
+
 
     }
 }
