@@ -69,11 +69,13 @@ pipeline{
             steps{
                 sleep(60)
                 dir('functional-test'){
-                    bat 'mvnw verify --% -Dskip.surefire.tests'
+                    bat 'mvn verify --% -Dskip.surefire.tests'
                 }
             }
         }
-
+        post{
+            junit allowEmptyResults: true, testResults: 'target/surefire-reports/*.xml, api-test/target/surefire-reports/*.xml, functional-test/target/failsafe-reports/*.xml'
+        }
 
     }
 }
