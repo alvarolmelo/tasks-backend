@@ -67,7 +67,10 @@ pipeline{
         }
         stage('Helf Check'){
             steps{
-                bat 'echo abc'
+                sleep(60)
+                dir('functional-test'){
+                    bat 'mvnw verify --% -Dskip.surefire.tests'
+                }
             }
         }
 
