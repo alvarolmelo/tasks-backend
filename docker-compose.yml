@@ -43,7 +43,7 @@ services:
           - WAR_FILE=frontend/target/tasks.war
           - CONTEXT=tasks
     networks:
-      - prod_net_front
+      - prod_net_back
     ports:
       - 9999:8080
     environment:

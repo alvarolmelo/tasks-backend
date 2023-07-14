@@ -65,6 +65,12 @@ pipeline{
                 bat 'docker-compose up -d'
             }
         }
+        stage('Helf Check'){
+            steps{
+                bat 'docker-compose build'
+                bat 'docker-compose up -d'
+            }
+        }
 
 
     }
