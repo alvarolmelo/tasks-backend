@@ -69,7 +69,7 @@ pipeline{
             steps{
                 sleep(60)
                 dir('functional-test'){
-                    bat 'mvn verify --% -Dskip.surefire.tests'
+                    bat 'mvn verify -Dskip.surefire.tests'
                 }
             }
         }
@@ -77,6 +77,12 @@ pipeline{
     post{
         always{
             junit allowEmptyResults: true, testResults: 'target/surefire-reports/*.xml,api-test/target/surefire-reports/*.xml,functional-test/target/failsafe-reports/*.xml'
+        }
+        unsuccessful{
+            emailext attachLog: true, body: 'See the attached log', subject: 'Build $BUILD_NUMER has failed', to: 'alvarolmelo@gmail.com'            
+        }
+        fixed{
+            emailext attachLog: true, body: 'Build os fine!!!', subject: 'Build $BUILD_NUMER has failed', to: 'alvarolmelo@gmail.com'            
         }
     }
 }
